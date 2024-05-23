@@ -1,7 +1,7 @@
 # Role of Momentum in Smoothing Objective Function and Generalizability of Deep Neural Networks
 Code for reproducing experiments in our paper.  
 Our experiments were based on the basic code for image classification.  
-shb.py used the implementation of "Understanding the Role of Momentum in Stochastic Gradient Methods" (NeurIPS2019).   
+nshb.py based on the implementation of "Understanding the Role of Momentum in Stochastic Gradient Methods" (NeurIPS2019).   
 See <<https://github.com/Kipok/understanding-momentum>>.
 
 # Abstract
