@@ -19,6 +19,6 @@ Please select method.
 parser.add_argument('--mode', default="normal", type=str, help="normal, critical, sampling")
 ```
 
-・"normal" means normal training mode. This mode measures the generalizability (test accuracy).  
-・"critical" means critical batch size search mode. This mode measures the number of steps required for the gradient norm to fall below a threshold value $\epsilon$.  
-・"sampling" means search direction noise sampling mode. This mode samples search direction noise at 10000steps by default.
+- "normal" means normal training mode. This mode measures the generalizability (test accuracy).  
+- "critical" means critical batch size search mode. This mode measures the number of steps required for the gradient norm to fall below a threshold value $\epsilon$.  
+- "sampling" means search direction noise sampling mode. This mode samples search direction noise at 10000steps by default.
