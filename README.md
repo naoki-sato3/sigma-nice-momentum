@@ -16,7 +16,7 @@ parser.add_argument("--wandb_entity", type=str, default='XXXXXX', help='entity o
 # Usage
 Please select method.
 ```
-parser.add_argument('--mode', default="normal", type=str, help="normal, critical, sampling")
+parser.add_argument('--mode', default="normal", type=str, help='normal, critical, sampling'))
 ```
 
 - "normal" means normal training mode. This mode measures the generalizability (test accuracy).  
