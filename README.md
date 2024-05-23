@@ -16,14 +16,9 @@ parser.add_argument("--wandb_entity", type=str, default='XXXXXX', help='entity o
 # Usage
 Please select method.
 ```
-parser.add_argument('--method', default="constant", type=str, help="constant, lr, beta, lr-batch, beta-batch, lr-beta, cosine, exp")
+parser.add_argument('--mode', default="normal", type=str, help="normal, critical, sampling")
 ```
 
-"constant" means constant learning rate, batch size, and momentum.  
-"lr" means only learning rate decayed, with constant batch size and momentum.  
-"beta" means only momnetum decayed, with constant learning rate and batch size.  
-"lr-batch" means lr decayed and batch size increased, with constant momentum.  
-"beta-batch" means momentum decayed and batch size increased, with constant learning rate.  
-"lr-beta" means lr decayed and momentum decayed, with constant batch size.  
-"cosine" means cosine annealing learning rate schedule, with constant batch size and momentum.  
-"exp" means exponential decay learning rate schedule, with constant batch size and momentum.
+・"normal" means normal training mode. This mode measures the generalizability (test accuracy).  
+・"critical" means critical batch size search mode. This mode measures the number of steps required for the gradient norm to fall below a threshold value $\epsilon$.  
+・"sampling" means search direction noise sampling mode. This mode samples search direction noise at 10000steps by default.
