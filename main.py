@@ -35,7 +35,7 @@ def train(epoch):
         loss = criterion(outputs, labels)
         loss.backward()
 
-        if args.method == "sampling" and steps == args.steps:
+        if args.mode == "sampling" and steps == args.steps:
             mt_list = optimizer.step(itr=steps)
             full_list = get_full_grad_list(net,trainset,optimizer)
             for m, g in zip(mt_list, full_list):
@@ -52,7 +52,7 @@ def train(epoch):
         total += labels.size(0)
         correct += predicted.eq(labels).sum().item()
 
-        if args.method == "critical":
+        if args.mode == "critical":
             norm = 0
             parameters = [p for p in net.parameters() if p.grad is not None and p.requires_grad]
             for p in parameters:
@@ -133,23 +133,23 @@ if __name__ == '__main__':
     parser.add_argument('--dataset', default="CIFAR100", type=str, help="CIFAR100, CIFAR10")
     parser.add_argument('--model', default="ResNet18", type=str, help="ResNet18, WideResNet-28-10, MobileNetv2")
     parser.add_argument('--optimizer', default="shb", type=str, help="sgd, shb, nshb")
-    parser.add_argument('--method', default="normal", type=str, help="normal, critical, sampling")
+    parser.add_argument('--mode', default="normal", type=str, help="normal, critical, sampling")
     parser.add_argument('--epochs', default=200, type=int, help="the number of epochs")
     parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
     parser.add_argument('--batchsize', default=8, type=int, help='training batch size')
     parser.add_argument('--beta1', default=0.9, type=float, help="effective momentum value")
     parser.add_argument('--nu', default=0.5, type=float, help='effective nu value')
-    parser.add_argument('--eps', default=0.5, type=float, help='the stopping condition for a method "critical"')
-    parser.add_argument('--steps', default=10000, type=int, help='the number of steps for a method "sampling"')
+    parser.add_argument('--eps', default=0.5, type=float, help='the stopping condition for a "critical" mode')
+    parser.add_argument('--steps', default=10000, type=int, help='the number of steps for a "sampling" mode')
     
     args = parser.parse_args()
     wandb_project_name = "role_of_momentum"
-    wandb_exp_name = f"{args.method},{args.optimizer},b={args.batchsize},lr={args.lr},{args.repeat}"
+    wandb_exp_name = f"{args.mode},{args.optimizer},b={args.batchsize},lr={args.lr},{args.repeat}"
     wandb.init(config = args,
                project = wandb_project_name,
                name = wandb_exp_name,
                entity = "XXXXXX")
-    wandb.init(settings=wandb.Settings(start_method='fork'))
+    wandb.init(settings=wandb.Settings(start_mode='fork'))
 
     print('==> Preparing data..')
     if args.dataset == "CIFAR100":
